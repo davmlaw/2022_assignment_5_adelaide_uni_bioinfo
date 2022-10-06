@@ -35,3 +35,8 @@ These files have had simulated errors created them, there are two types:
 
 There are a maximum of 3 types of each error in each file.
 
+## Testing / Marking
+
+There's a script (./bin/detect_differences.sh) that we'll use to check whether the files match what we expect.
+
+Feel free to use it to check your work. Run the diff lines against your files (removing the redirect to /dev/null) to see what needs to change
