@@ -9,7 +9,7 @@ This repository has 2 branches:
 
 ## Data files
 
-The "data" directory contains 35 files:
+The "data" and "doc" directories contains 35 files each:
 
 ```
 BIOINF_3000_2022-1
@@ -22,7 +22,7 @@ BIOINF_3000_2022-35
 
 These correspond to the name of the Virtual Machine you were assigned at the start of the course.
 
-You should ONLY work on the file assigned to you.
+You should ONLY work on the files assigned to you.
 
 ## Simulated errors
 
