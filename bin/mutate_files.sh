@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Usage: mutate_files.sh BIOINFO* (make sure you don't include 'answers.txt')
+
 set -e
 
 FULL_PATH_TO_SCRIPT="$(realpath "${BASH_SOURCE[-1]}")"
@@ -13,9 +15,9 @@ fi
 for filename in "$@"
 do
     FAKE_NAME=$(faker name)
-    FAKE_MESSAGE="Don't blame me, blame ${FAKE_NAME}"
     python3 ${BASE_DIR}/mutate.py ${filename}
     git add ${filename}
-    git commit -m ${FAKE_MESSAGE}
-    echo "${filename} - ${FAKE_MESSAGE}" >> ${ANSWERS_FILE}
+    git commit -m "Don't blame me, blame ${FAKE_NAME}"
+    GIT_COMMIT=$(git rev-parse HEAD)
+    echo "${filename} - ${GIT_COMMIT} - ${FAKE_NAME}" >> ${ANSWERS_FILE}
 done
