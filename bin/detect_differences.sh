@@ -7,8 +7,10 @@ REPO_DIR=$(dirname $(dirname ${FULL_PATH_TO_SCRIPT}))
 
 DATA_DIR=${REPO_DIR}/data
 ORIGINAL_DATA_DIR=${REPO_DIR}/original_data
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+# BRANCH=stable  # Testing only!
 
-echo "filename,files_match,case_insensitive_match,x_strip_match"
+echo "branch,filename,grade,files_match,case_insensitive_match,x_strip_match"
 
 for data_filename in ${DATA_DIR}/BIOINF*;
 do
@@ -23,5 +25,18 @@ do
     cat ${data_filename} | sed 's/XXXXXXX //g' | diff ${original_data_filename} - > /dev/null
     exit_status=$?
     x_strip_match="N" && [[ $exit_status == 0 ]] && x_strip_match="Y"
-    echo "${BASENAME},${files_match},${case_insensitive_match},${x_strip_match}"
+    GRADE="fail"
+    if [ ${BRANCH} == "main" ]; then
+        # In main - everything should be fixed
+        if [ ${files_match} == "Y" ]; then
+            GRADE="pass"
+        fi
+    elif [ ${BRANCH} == "stable" ]; then
+        # In stable - only the XXX should be fixed (so case insensitive is left)
+        if [[ (${files_match} == "N") && (${case_insensitive_match} == "Y") ]]; then
+            GRADE="pass"
+        fi
+    fi
+
+    echo "${BRANCH},${BASENAME},${GRADE},${files_match},${case_insensitive_match},${x_strip_match}"
 done
