@@ -10,3 +10,8 @@
 
 - Initial commit
 
+## [0.1.2] - 2022-10-11
+
+### Changed
+
+- Corrected low severity issue in data/BIOINF_3000_2022-29 relating to random capitalisation of words
