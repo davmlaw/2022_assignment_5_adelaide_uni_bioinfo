@@ -22,6 +22,8 @@ BIOINF_3000_2022-35
 
 These correspond to the name of the Virtual Machine you were assigned at the start of the course.
 
+If you're on your VM, you can get this by typing "hostname" on the command prompt
+
 You should ONLY work on the files assigned to you.
 
 ## Simulated errors
